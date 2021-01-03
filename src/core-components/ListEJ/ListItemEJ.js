@@ -5,6 +5,8 @@ import { ListItem, Body, Right } from 'native-base';
 import IconEJ from '../IconEJ/IconEJ';
 import TextEJ from '../TextEJ/TextEJ';
 
+import color from '../../config/color/color';
+
 const ListItemEJ = ({
   user,
   rightIcon = '',
@@ -16,7 +18,7 @@ const ListItemEJ = ({
   const userInfo = `${user.workarea} | ${user.cellphone}`;
   return (
     <ListItem avatar>
-      <IconEJ iconName={leftIcon} size={20} color={'#00796b'} />
+      <IconEJ iconName={leftIcon} size={20} color={color.icon} />
       <Body>
         <TouchableOpacity onPress={() => onPressItem(user)}>
           <TextEJ type="normal">{userName}</TextEJ>
@@ -28,7 +30,7 @@ const ListItemEJ = ({
           onPressIcon={() => onPressRightIcon(user)}
           iconName={rightIcon}
           size={20}
-          color={'#00796b'}
+          color={color.icon}
         />
         <TextEJ type="note">{userInfo}</TextEJ>
       </Right>

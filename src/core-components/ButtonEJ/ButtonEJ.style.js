@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import color from '../../config/color/color';
+
 const styles = StyleSheet.create({
   container: {
     // marginHorizontal: 10,
@@ -10,12 +12,12 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: color.primary,
   },
   text: {
     fontSize: 16,
     textTransform: 'uppercase',
-    color: '#ffffff',
+    color: color.white,
   },
 });
 

@@ -8,6 +8,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconEJ from '../../core-components/IconEJ/IconEJ';
 import TextEJ from '../../core-components/TextEJ/TextEJ';
 
+import color from '../../config/color/color';
+
 const Tab = createBottomTabNavigator();
 
 const Status = () => {
@@ -24,16 +26,18 @@ const TabScreen = ({ }) => (
           Search: 'user-plus',
           User: 'user',
         };
-        const color = focused ? '#ffffff' : '#BDBDBD';
-        return <IconEJ iconName={icons[route.name]} size={20} color={color} />;
+        const colorIcon = focused ? color.white : color.gray;
+        return (
+          <IconEJ iconName={icons[route.name]} size={20} color={colorIcon} />
+        );
       },
     })}
     tabBarOptions={{
-      activeTintColor: '#ffffff',
-      inactiveTintColor: '#BDBDBD',
+      activeTintColor: color.white,
+      inactiveTintColor: color.gray,
       style: {
         paddingTop: 4,
-        backgroundColor: '#3F51B5',
+        backgroundColor: color.primary,
         paddingBottom: 4,
       },
     }}>
