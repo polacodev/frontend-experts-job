@@ -48,6 +48,10 @@ let localization = new LocalizedStrings({
 
     //Routes
     routesExit: 'Exit',
+
+    networkTitle: 'Network Information!',
+    networkMessage:
+      'To use Experts Job, enable mobile data or connect to WI-FI network.',
   },
   es: {
     //SignIn View
@@ -101,6 +105,11 @@ let localization = new LocalizedStrings({
 
     //Routes
     routesExit: 'Salir',
+
+    //Network Information
+    networkTitle: 'Informacion de Red!',
+    networkMessage:
+      'Para usar Experts Job, habilite los datos moviles o conecte a una red WI-FI.',
   },
 });
 
