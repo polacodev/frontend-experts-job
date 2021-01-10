@@ -9,8 +9,15 @@ import ListEJ from '../../core-components/ListEJ/ListEJ';
 import localization from '../../localization/localization';
 import client from '../../service/setup';
 
+import * as localStorage from '../../config/local-storage/localStorage';
+
 const Search = () => {
   const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  // const [search, setSearch] = useState({
+  //   email: { contains: '@' },
+  // });
+  const [search, setSearch] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
   const updateUserList = ({ data }) => {
@@ -18,6 +25,19 @@ const Search = () => {
       return [...currentUsers, data.userAdded];
     });
   };
+
+  useEffect(() => {
+    const isUserLogged = async () => {
+      try {
+        const token = await localStorage.getStringValue('token');
+        setCurrentUser(token);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+
+    isUserLogged();
+  }, []);
 
   useEffect(() => {
     getUsers();
@@ -34,11 +54,11 @@ const Search = () => {
           console.log(err);
         },
       });
-  }, []);
+  });
 
   const getUsers = async () => {
     try {
-      const { data, loading } = await getAllUsers();
+      const { data, loading } = await getAllUsers(search, currentUser);
       setUsers(data.getUsers);
       setIsLoading(loading);
     } catch (error) {

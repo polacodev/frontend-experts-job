@@ -1,14 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const GET_ALL_USERS = gql`
-  query getAll {
-    getUsers {
+  query getAll($search: SearchUserInput, $user: String) {
+    getUsers(search: $search, user: $user) {
       name
       email
       password
       cellphone
       workarea
       status
+      description
+      knowledge
     }
   }
 `;

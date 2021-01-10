@@ -1,9 +1,13 @@
 import client from '../../service/setup';
 import { GET_ALL_USERS, DELETE_USER } from './user.graphql';
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (search, user) => {
   try {
     const { data, loading } = await client.query({
+      variables: {
+        search: search,
+        user: user,
+      },
       query: GET_ALL_USERS,
     });
     return { data, loading };
