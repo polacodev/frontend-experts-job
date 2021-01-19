@@ -1,5 +1,7 @@
-import * as React from 'react';
-import { Button, Text } from 'native-base';
+import React from 'react';
+
+import { Text } from 'native-base';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   NavigationContainer,
@@ -7,37 +9,59 @@ import {
 } from '@react-navigation/native';
 
 import TabScreen from '../Tab/Tab';
-import TextEJ from '../../core-components/TextEJ/TextEJ';
-
+import * as localStorage from '../../config/local-storage/localStorage';
 import SignIn from '../SignIn/SignIn';
 // import SignUp from '../components/SignUp/SignUp';
+import localization from '../../localization/localization';
+
+import color from '../../config/color/color';
+import styles from './Stack.style';
 
 const Stack = createStackNavigator();
 
-const StackScreen = ({ navigation }) => {
-  const goBack = () => {
-    navigation.navigate('Sign In');
+const StackScreen = () => {
+  const goBack = (navigation) => {
+    localStorage.removeMultipleValues(['language', 'token']);
+    navigation.navigate('SignIn');
   };
+
+  const getHeaderTitle = (route) => {
+    const routes = {
+      undefined: localization.ContactsTabTop,
+      Contacts: localization.ContactsTabTop,
+      Status: localization.StatusTabTop,
+      Search: localization.SearchTabTop,
+      User: localization.UserTabTop,
+    };
+    return routes[getFocusedRouteNameFromRoute(route)];
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="SignIn"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#3F51B5',
+            backgroundColor: color.primary,
           },
           headerTitleStyle: {
-            color: '#ffffff',
+            color: color.white,
           },
         }}>
         <Stack.Screen
-          options={({ route }) => ({
+          options={({ route, navigation }) => ({
             headerLeft: () => null,
-            headerTitle: getFocusedRouteNameFromRoute(route),
+            headerStyle: {
+              height: 50,
+              backgroundColor: color.primary,
+            },
+            headerTitle: getHeaderTitle(route),
             headerRight: () => (
-              <Button onPress={goBack}>
-                <Text>Exit</Text>
-              </Button>
+              <Text
+                onPress={() => goBack(navigation)}
+                style={styles.exitButton}>
+                Exit
+              </Text>
             ),
           })}
           name="Contacts"
