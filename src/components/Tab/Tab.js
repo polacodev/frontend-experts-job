@@ -1,50 +1,85 @@
 import * as React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // import Status from '../components/Status/Status';
-// import Search from '../components/Search/Search';
+import Search from '../Search/Search';
 // import UserInformation from '../components/UserProfile/UserInformation';
 // import Contacts from '../components/Contacts/Contacts';
 import IconEJ from '../../core-components/IconEJ/IconEJ';
-import TextEJ from '../../core-components/TextEJ/TextEJ';
+import CustomTextEJ from '../../core-components/CustomTextEJ/CustomTextEJ';
+import localization from '../../localization/localization';
 
 import color from '../../config/color/color';
+import styles from './Tab.style';
 
 const Tab = createBottomTabNavigator();
 
-const Status = () => {
-  return <TextEJ type="normal">userNam se es</TextEJ>;
-};
+const TabCustomBar = ({ state, descriptors, navigation }) => {
+  const focusedOptions = descriptors[state.routes[state.index].key].options;
 
-const TabScreen = ({ }) => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused }) => {
+  if (focusedOptions.tabBarVisible === false) {
+    return null;
+  }
+
+  return (
+    <View style={styles.container}>
+      {state.routes.map((route, index) => {
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
         const icons = {
           Contacts: 'address-book',
           Status: 'dot-circle-o',
-          Search: 'user-plus',
+          Search: 'search-plus',
           User: 'user',
         };
-        const colorIcon = focused ? color.white : color.gray;
+
+        const routes = {
+          Contacts: localization.ContactsTabFoot,
+          Status: localization.StatusTabFoot,
+          Search: localization.SearchTabFoot,
+          User: localization.UserTabFoot,
+        };
+
+        const colorIcon = isFocused ? color.white : color.gray;
+        const colorText = isFocused ? color.white : color.gray;
+
         return (
-          <IconEJ iconName={icons[route.name]} size={20} color={colorIcon} />
+          <TouchableOpacity
+            key={routes[route.name]}
+            onPress={onPress}
+            activeOpacity={1}
+            style={styles.tabBarContainer}>
+            <IconEJ iconName={icons[route.name]} size={20} color={colorIcon} />
+            <CustomTextEJ type="normal" size={10} color={colorText}>
+              {routes[route.name]}
+            </CustomTextEJ>
+          </TouchableOpacity>
         );
-      },
-    })}
-    tabBarOptions={{
-      activeTintColor: color.white,
-      inactiveTintColor: color.gray,
-      style: {
-        paddingTop: 4,
-        backgroundColor: color.primary,
-        paddingBottom: 4,
-      },
-    }}>
-    <Tab.Screen name="Contacts" component={Status} />
-    <Tab.Screen name="Status" component={Status} />
-    <Tab.Screen name="Search" component={Status} />
-    <Tab.Screen name="User" component={Status} />
+      })}
+    </View>
+  );
+};
+
+const TabScreen = () => (
+  <Tab.Navigator tabBar={(props) => <TabCustomBar {...props} />}>
+    <Tab.Screen name="Contacts" component={Search} />
+    <Tab.Screen name="Status" component={Search} />
+    <Tab.Screen name="Search" component={Search} />
+    <Tab.Screen name="User" component={Search} />
   </Tab.Navigator>
 );
 
