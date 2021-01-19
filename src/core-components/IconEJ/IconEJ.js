@@ -19,8 +19,8 @@ const IconEJ = ({
       />
     </TouchableOpacity>
   ) : (
-      <Icon type="FontAwesome" name={iconName} style={styles(color, size).icon} />
-    );
+    <Icon type="FontAwesome" name={iconName} style={styles(color, size).icon} />
+  );
 };
 
 export default IconEJ;
