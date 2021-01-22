@@ -1,5 +1,20 @@
 import { gql } from '@apollo/client';
 
+export const CREATE_USER = gql`
+  mutation addUSer($user: UserInput!) {
+    addUser(user: $user) {
+      name
+      email
+      password
+      cellphone
+      workarea
+      status
+      description
+      knowledge
+    }
+  }
+`;
+
 export const GET_ALL_USERS = gql`
   query getAll($search: SearchUserInput, $user: String) {
     getUsers(search: $search, user: $user) {

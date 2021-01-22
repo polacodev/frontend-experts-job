@@ -1,5 +1,17 @@
 import client from '../../service/setup';
-import { GET_ALL_USERS, DELETE_USER } from './user.graphql';
+import { GET_ALL_USERS, DELETE_USER, CREATE_USER } from './user.graphql';
+
+export const createUser = async (user) => {
+  try {
+    const { data } = await client.mutate({
+      variables: { user },
+      mutation: CREATE_USER,
+    });
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const getAllUsers = async (search, user) => {
   try {
