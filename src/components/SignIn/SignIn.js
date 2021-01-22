@@ -256,7 +256,7 @@ const SignIn = ({ navigation }) => {
           ? iconItems[password.statePassword]
           : iconItems[password.statePassword]}
       </Item>
-      <ButtonEJ title={localization.customButton} onPress={signInUser} />
+      <ButtonEJ title={localization.signInButton} onPress={signInUser} />
     </Form>
   );
 
@@ -267,10 +267,10 @@ const SignIn = ({ navigation }) => {
         onValueChange={setLanguage}
         value={englishLanguage.isEnglishLabel}
       />
-      <Text style={styles.footerText}>{localization.footerLabel} </Text>
-      <TouchableOpacity onPress={() => console.log('***')}>
+      <Text style={styles.footerText}>{localization.signInFooterLabel} </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
         <Text style={styles.footerTextButton}>
-          {localization.buttonFooterLabel}
+          {localization.signInButtonFooterLabel}
         </Text>
       </TouchableOpacity>
     </View>
