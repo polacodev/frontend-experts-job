@@ -11,7 +11,7 @@ import {
 import TabScreen from '../Tab/Tab';
 import * as localStorage from '../../config/local-storage/localStorage';
 import SignIn from '../SignIn/SignIn';
-// import SignUp from '../components/SignUp/SignUp';
+import SignUp from '../SignUp/SignUp';
 import localization from '../../localization/localization';
 
 import color from '../../config/color/color';
@@ -78,10 +78,10 @@ const StackScreen = () => {
         <Stack.Screen
           options={{
             header: () => null,
-            headerTitle: 'Sign In',
+            headerTitle: 'Sign Up',
           }}
           name="SignUp"
-          component={SignIn}
+          component={SignUp}
         />
       </Stack.Navigator>
     </NavigationContainer>
