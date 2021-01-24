@@ -104,8 +104,8 @@ let localization = new LocalizedStrings({
     //User View
     UserTabTop: 'Informacion de Usuario',
     UserTabFoot: 'Usuario',
-    availableText: 'Disponible',
-    unavailableText: 'No Disponible',
+    availableText: 'DISPONIBLE',
+    unavailableText: 'NO DISPONIBLE',
     userCellphone: 'Celular',
     userEmail: 'Correo',
     userWorkarea: 'Area',
