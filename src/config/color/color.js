@@ -5,6 +5,7 @@ const color = {
   gray: '#bdbdbd',
   error: '#f44336',
   icon: '#00796b',
+  text: '#616161',
 };
 
 export default color;
