@@ -3,11 +3,14 @@ import { Container, Content, Button, Text } from 'native-base';
 
 import styles from './ButtonEJ.style';
 
-const ButtonEJ = ({ title = '', onPress = () => ({}) }) => {
+const ButtonEJ = ({ disable = false, title = '', onPress = () => ({}) }) => {
   return (
-    <Container style={styles.container}>
+    <Container style={styles(disable).container}>
       <Content>
-        <Button style={styles.button} onPress={onPress}>
+        <Button
+          style={styles(disable).button}
+          disabled={disable}
+          onPress={onPress}>
           <Text>{title}</Text>
         </Button>
       </Content>
