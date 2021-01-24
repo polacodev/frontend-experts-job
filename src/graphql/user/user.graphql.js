@@ -15,12 +15,25 @@ export const CREATE_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation updateUser($_id: ID!, $user: UserInput!) {
+    updateUser(_id: $_id, user: $user) {
+      name
+      email
+      cellphone
+      workarea
+      status
+      description
+      knowledge
+    }
+  }
+`;
+
 export const GET_ALL_USERS = gql`
   query getAll($search: SearchUserInput, $user: String) {
     getUsers(search: $search, user: $user) {
       name
       email
-      password
       cellphone
       workarea
       status
@@ -39,12 +52,26 @@ export const DELETE_USER = gql`
   }
 `;
 
+export const GET_USER_BY_STRING = gql`
+  query getUserByString($token: String) {
+    getUserByString(token: $token) {
+      _id
+      name
+      email
+      cellphone
+      workarea
+      status
+      description
+      knowledge
+    }
+  }
+`;
+
 export const SUBSCRIPTION_USER_ADDED = gql`
   subscription userAdded {
     userAdded {
       name
       email
-      password
       cellphone
       workarea
       status
