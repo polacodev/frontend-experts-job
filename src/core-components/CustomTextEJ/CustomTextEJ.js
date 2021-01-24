@@ -3,7 +3,7 @@ import { Text } from 'native-base';
 
 import styles from './CustomTextEJ.style';
 
-const CustomTextEJ = ({ type = '', children, color, size }) => {
+const CustomTextEJ = ({ type = 'normal', children, color, size }) => {
   const typeOfText = (element) => {
     switch (element) {
       case 'normal':
