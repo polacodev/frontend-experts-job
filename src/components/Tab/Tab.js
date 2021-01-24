@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import { View, TouchableOpacity, Keyboard } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+// import Contacts from '../components/Contacts/Contacts';
 // import Status from '../components/Status/Status';
 import Search from '../Search/Search';
-// import UserInformation from '../components/UserProfile/UserInformation';
-// import Contacts from '../components/Contacts/Contacts';
+import UserInformation from '../UserInformation/UserInformation';
 import IconEJ from '../../core-components/IconEJ/IconEJ';
 import CustomTextEJ from '../../core-components/CustomTextEJ/CustomTextEJ';
 import localization from '../../localization/localization';
@@ -74,13 +73,36 @@ const TabCustomBar = ({ state, descriptors, navigation }) => {
   );
 };
 
-const TabScreen = () => (
-  <Tab.Navigator tabBar={(props) => <TabCustomBar {...props} />}>
-    <Tab.Screen name="Contacts" component={Search} />
-    <Tab.Screen name="Status" component={Search} />
-    <Tab.Screen name="Search" component={Search} />
-    <Tab.Screen name="User" component={Search} />
-  </Tab.Navigator>
-);
+const TabScreen = () => {
+  const [isFooterHidden, setIsFooterHidden] = useState(false);
+
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', () => setIsFooterHidden(true));
+    Keyboard.addListener('keyboardDidHide', () => setIsFooterHidden(false));
+
+    // cleanup function
+    return () => {
+      Keyboard.removeListener('keyboardDidShow', () => setIsFooterHidden(true));
+      Keyboard.removeListener('keyboardDidHide', () =>
+        setIsFooterHidden(false),
+      );
+    };
+  });
+
+  return (
+    <Tab.Navigator tabBar={(props) => <TabCustomBar {...props} />}>
+      <Tab.Screen name="Contacts" component={Search} />
+      <Tab.Screen name="Status" component={Search} />
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen
+        name="User"
+        options={() => ({
+          tabBarVisible: !isFooterHidden,
+        })}
+        component={UserInformation}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export default TabScreen;
