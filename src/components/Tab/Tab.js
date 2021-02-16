@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Keyboard } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// import Contacts from '../components/Contacts/Contacts';
+import Contacts from '../Contacts/Contacts';
 // import Status from '../components/Status/Status';
 import Search from '../Search/Search';
 import UserInformation from '../UserInformation/UserInformation';
@@ -91,9 +91,27 @@ const TabScreen = () => {
 
   return (
     <Tab.Navigator tabBar={(props) => <TabCustomBar {...props} />}>
-      <Tab.Screen name="Contacts" component={Search} />
-      <Tab.Screen name="Status" component={Search} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen
+        name="Contacts"
+        component={Contacts}
+        options={() => ({
+          tabBarVisible: !isFooterHidden,
+        })}
+      />
+      <Tab.Screen
+        name="Status"
+        component={Search}
+        options={() => ({
+          tabBarVisible: !isFooterHidden,
+        })}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={() => ({
+          tabBarVisible: !isFooterHidden,
+        })}
+      />
       <Tab.Screen
         name="User"
         options={() => ({
