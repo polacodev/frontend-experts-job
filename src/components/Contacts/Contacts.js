@@ -76,12 +76,16 @@ export default class Contacts extends React.Component {
   };
 
   getContacts = async (id) => {
-    const { data, loading } = await getAllContacts(id);
-    this.setState({
-      contacts: data.getContactsByUserId,
-      originalData: data.getContactsByUserId,
-      isLoading: loading,
-    });
+    try {
+      const { data, loading } = await getAllContacts(id);
+      this.setState({
+        contacts: data.getContactsByUserId,
+        originalData: data.getContactsByUserId,
+        isLoading: loading,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   onPressItem = (value) => {

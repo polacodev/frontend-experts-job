@@ -5,6 +5,7 @@ export const CREATE_CONTACT = gql`
     addContact(contact: $contact) {
       _id
       user_id
+      createdBy
       name
       cellphone
     }
@@ -16,6 +17,7 @@ export const GET_ALL_CONTACTS_BY_USER_ID = gql`
     getContactsByUserId(_id: $_id) {
       _id
       user_id
+      createdBy
       name
       email
       cellphone
@@ -31,6 +33,7 @@ export const DELETE_CONTACT_BY_CONTACT_ID = gql`
   mutation deleteContact($_id: ID!) {
     deleteContact(_id: $_id) {
       user_id
+      createdBy
       name
       email
     }
