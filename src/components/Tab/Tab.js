@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Keyboard } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Contacts from '../Contacts/Contacts';
-// import Status from '../components/Status/Status';
+import Status from '../Status/Status';
 import Search from '../Search/Search';
 import UserInformation from '../UserInformation/UserInformation';
 import IconEJ from '../../core-components/IconEJ/IconEJ';
@@ -100,7 +100,7 @@ const TabScreen = () => {
       />
       <Tab.Screen
         name="Status"
-        component={Search}
+        component={Status}
         options={() => ({
           tabBarVisible: !isFooterHidden,
         })}
