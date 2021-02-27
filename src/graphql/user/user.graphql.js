@@ -32,6 +32,7 @@ export const UPDATE_USER = gql`
 export const GET_ALL_USERS = gql`
   query getAll($search: SearchUserInput, $user: String) {
     getUsers(search: $search, user: $user) {
+      _id
       name
       email
       cellphone
