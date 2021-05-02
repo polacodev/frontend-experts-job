@@ -60,7 +60,7 @@ const StackScreen = () => {
               <Text
                 onPress={() => goBack(navigation)}
                 style={styles.exitButton}>
-                Exit
+                {localization.routesExit}
               </Text>
             ),
           })}
