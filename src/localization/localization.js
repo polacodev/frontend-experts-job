@@ -62,6 +62,26 @@ let localization = new LocalizedStrings({
     validationCellphone: 'Please enter a numeric value of 8 digits long',
     validationArea:
       'Please enter a alphabetic value between 5 and 20 characters long',
+
+    //errors && success
+    userCreateError: 'ERROR: User has not been created',
+    userSaveError: 'ERROR: Information not saved',
+    userRequestError: 'ERROR: Was not able to get User Info',
+    userSaveSuccess: 'Information saved',
+
+    contactsDeleteError: 'ERROR: Contact has not been deleted',
+    contactsRequestError: 'ERROR: Was not able to get Contacts',
+    contactsDeleteSuccess: 'Contact has been deleted',
+
+    searchAddContactError: 'ERROR: Contact has not been added',
+    searchAddContactSuccess: 'Contact has been added',
+
+    authError: 'ERROR: Authentication error!',
+
+    statusAddError: 'ERROR: Status has not been added',
+    statusRequestError: 'ERROR: Was not able to get Status',
+    statusDeleteError: 'ERROR: Status has not been deleted',
+    statusDeleteSuccess: 'Status has been deleted',
   },
   es: {
     //SignIn View
@@ -130,6 +150,26 @@ let localization = new LocalizedStrings({
     validationPassword: 'Por favor ingrese un valor entre 5 a 20 caracteres',
     validationCellphone: 'Por favor ingrese un valor numerico de 8 digitos',
     validationArea: 'Por favor ingrese un valor entre 5 a 20 caracteres',
+
+    //errors && success
+    userCreateError: 'ERROR: Usuario no ha sido creado',
+    userSaveError: 'ERROR: Informacion no ha sido guardada',
+    userRequestError: 'ERROR: No se pudo recuperar datos',
+    userSaveSuccess: 'Informacion ha sido guardada',
+
+    contactsDeleteError: 'ERROR: Contacto no ha sido eliminado',
+    contactsRequestError: 'ERROR: No se pudo recuperar lista Contactos',
+    contactsDeleteSuccess: 'Contacto ha sido eliminado',
+
+    searchAddContactError: 'ERROR: Contacto no ha sido agregado',
+    searchAddContactSuccess: 'Contacto ha sido agregado',
+
+    authError: 'ERROR: Error de Authenticacion!',
+
+    statusAddError: 'ERROR: No se pudo crear el nuevo estado',
+    statusRequestError: 'ERROR: No se pudo recuperar lista Estados',
+    statusDeleteError: 'ERROR: No se pudo eliminar el estado',
+    statusDeleteSuccess: 'Estado ha sido eliminado',
   },
 });
 

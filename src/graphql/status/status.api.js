@@ -1,3 +1,5 @@
+import NotifyMessage from '../../core-components/ToastMessage/ToastMessage';
+import localization from '../../localization/localization';
 import client from '../../service/setup';
 import {
   CREATE_STATUS,
@@ -13,6 +15,7 @@ export const createNewStatus = async (notification) => {
     });
     return data;
   } catch (error) {
+    NotifyMessage(localization.statusAddError);
     console.log(error.message);
   }
 };
@@ -27,6 +30,7 @@ export const getAllStatus = async (_id) => {
     });
     return { data, loading };
   } catch (error) {
+    NotifyMessage(localization.statusRequestError);
     console.log(error.message);
   }
 };
@@ -39,8 +43,10 @@ export const deleteStatusById = async (_id) => {
       },
       mutation: DELETE_STATUS_BY_CONTACT_ID,
     });
+    NotifyMessage(localization.statusDeleteSuccess);
     return { data, loading };
   } catch (error) {
+    NotifyMessage(localization.statusDeleteError);
     console.log(error.message);
   }
 };

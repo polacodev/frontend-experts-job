@@ -1,3 +1,5 @@
+import NotifyMessage from '../../core-components/ToastMessage/ToastMessage';
+import localization from '../../localization/localization';
 import client from '../../service/setup';
 import {
   GET_ALL_USERS,
@@ -15,6 +17,7 @@ export const createUser = async (user) => {
     });
     return data;
   } catch (error) {
+    NotifyMessage(localization.userCreateError);
     console.log(error.message);
   }
 };
@@ -28,8 +31,10 @@ export const updateUser = async (id, user) => {
       },
       mutation: UPDATE_USER,
     });
+    NotifyMessage(localization.userSaveSuccess);
     return data;
   } catch (error) {
+    NotifyMessage(localization.userSaveError);
     console.log(error.message);
   }
 };
@@ -69,6 +74,7 @@ export const getPersonalInformation = async (token) => {
     });
     return data;
   } catch (error) {
+    NotifyMessage(localization.userRequestError);
     console.log(error.message);
   }
 };

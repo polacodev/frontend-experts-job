@@ -1,3 +1,5 @@
+import NotifyMessage from '../../core-components/ToastMessage/ToastMessage';
+import localization from '../../localization/localization';
 import client from '../../service/setup';
 import {
   GET_ALL_CONTACTS_BY_USER_ID,
@@ -11,8 +13,10 @@ export const createNewContact = async (contact) => {
       variables: { contact },
       mutation: CREATE_CONTACT,
     });
+    NotifyMessage(localization.searchAddContactSuccess);
     return data;
   } catch (error) {
+    NotifyMessage(localization.searchAddContactError);
     console.log(error.message);
   }
 };
@@ -27,6 +31,7 @@ export const getAllContacts = async (_id) => {
     });
     return { data, loading };
   } catch (error) {
+    NotifyMessage(localization.contactsRequestError);
     console.log(error.message);
   }
 };
@@ -39,8 +44,10 @@ export const deleteContactById = async (_id) => {
       },
       mutation: DELETE_CONTACT_BY_CONTACT_ID,
     });
+    NotifyMessage(localization.contactsDeleteSuccess);
     return { data, loading };
   } catch (error) {
+    NotifyMessage(localization.contactsDeleteError);
     console.log(error.message);
   }
 };

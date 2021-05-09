@@ -1,3 +1,5 @@
+import NotifyMessage from '../../core-components/ToastMessage/ToastMessage';
+import localization from '../../localization/localization';
 import client from '../../service/setup';
 import AUTH from './authentication.graphql';
 
@@ -9,6 +11,7 @@ const authentication = async (auth) => {
     });
     return data;
   } catch (error) {
+    NotifyMessage(localization.authError);
     console.log(error.message);
   }
 };
