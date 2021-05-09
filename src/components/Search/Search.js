@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Alert } from 'react-native';
 import _ from 'lodash';
 
-// import { SUBSCRIPTION_USER_ADDED } from '../../graphql/user/user.graphql';
 import {
   getAllUsers,
   getPersonalInformation,
@@ -11,6 +10,7 @@ import {
   getAllContacts,
   createNewContact,
 } from '../../graphql/contact/contact.api';
+import { SUBSCRIPTION_USER_ADDED } from '../../graphql/user/user.graphql';
 
 import ActivityIndicatorEJ from '../../core-components/ActivityIndicatorEJ/ActivityIndicatorEJ';
 import EmptyDataEJ from '../../core-components/EmptyData/EmptyDataEJ';
@@ -20,7 +20,7 @@ import HeaderEJ from '../../core-components/HeaderEJ/HeaderEJ';
 import * as localStorage from '../../config/local-storage/localStorage';
 import localization from '../../localization/localization';
 import * as utils from '../../utils/utils';
-// import client from '../../service/setup';
+import client from '../../service/setup';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -50,20 +50,20 @@ export default class Search extends React.Component {
     await this.getUsers();
   };
 
-  // componentDidUpdate = () => {
-  //   client
-  //     .subscribe({
-  //       query: SUBSCRIPTION_USER_ADDED,
-  //     })
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.updateUserList(data);
-  //       },
-  //       error: (err) => {
-  //         console.log(err);
-  //       },
-  //     });
-  // };
+  componentDidUpdate = () => {
+    client
+      .subscribe({
+        query: SUBSCRIPTION_USER_ADDED,
+      })
+      .subscribe({
+        next: (data) => {
+          this.updateUserList(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  };
 
   isUserLogged = async () => {
     try {
@@ -111,9 +111,9 @@ export default class Search extends React.Component {
   };
 
   updateUserList = ({ data }) => {
-    // setUsers((currentUsers) => {
-    //   return [...currentUsers, data.userAdded];
-    // });
+    this.setState((prevState) => ({
+      users: _.uniqBy([...prevState.users, data.userAdded], '_id'),
+    }));
   };
 
   getUsers = async () => {

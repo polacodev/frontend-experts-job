@@ -71,11 +71,14 @@ export const GET_USER_BY_STRING = gql`
 export const SUBSCRIPTION_USER_ADDED = gql`
   subscription userAdded {
     userAdded {
+      _id
       name
       email
       cellphone
       workarea
       status
+      description
+      knowledge
     }
   }
 `;
