@@ -39,3 +39,20 @@ export const DELETE_CONTACT_BY_CONTACT_ID = gql`
     }
   }
 `;
+
+export const SUBSCRIPTION_CONTACT_ADDED = gql`
+  subscription contactAdded {
+    contactAdded {
+      _id
+      user_id
+      createdBy
+      name
+      email
+      cellphone
+      workarea
+      status
+      description
+      knowledge
+    }
+  }
+`;

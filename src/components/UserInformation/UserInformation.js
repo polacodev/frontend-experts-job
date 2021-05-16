@@ -252,10 +252,10 @@ export default class UserInformation extends React.Component {
     contacts.forEach(async (item) => {
       const notification = {
         _id: item.user_id,
-        createdBy: user._id,
-        message: 'lol',
         name: user.name,
         email: user.email,
+        message: 'lol',
+        createdBy: user._id,
         cellphone: user.cellphone,
         workarea: user.workarea,
         knowledge: user.knowledge,
@@ -271,7 +271,7 @@ export default class UserInformation extends React.Component {
   };
 
   render() {
-    const { user, radio, isDisabledButton, contacts } = this.state;
+    const { user, radio, isDisabledButton } = this.state;
     const userTopInformation = () => (
       <View>
         <View style={styles.userTopInformationTitle}>
@@ -382,7 +382,7 @@ export default class UserInformation extends React.Component {
 
     return (
       <Container>
-        {console.log('-*>', contacts)}
+        {/* {console.log('status=>', this.state.user.status)} */}
         <Content>
           {userTopInformation()}
           {userInformationForm()}

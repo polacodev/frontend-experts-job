@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Alert } from 'react-native';
+import _ from 'lodash';
+
 import { getPersonalInformation } from '../../graphql/user/user.api';
 import { getAllStatus } from '../../graphql/status/status.api';
+import {
+  // SUBSCRIPTION_NOTIFICATION_ADDED,
+  SUBSCRIPTION_NOTIFICATION_ADDED_BY_ID,
+} from '../../graphql/status/status.graphql';
 
 import ActivityIndicatorEJ from '../../core-components/ActivityIndicatorEJ/ActivityIndicatorEJ';
 import EmptyDataEJ from '../../core-components/EmptyData/EmptyDataEJ';
@@ -11,6 +17,7 @@ import HeaderEJ from '../../core-components/HeaderEJ/HeaderEJ';
 import * as localStorage from '../../config/local-storage/localStorage';
 import localization from '../../localization/localization';
 import * as utils from '../../utils/utils';
+import client from '../../service/setup';
 
 export default class Status extends React.Component {
   constructor(props) {
@@ -35,6 +42,33 @@ export default class Status extends React.Component {
 
   componentDidMount = async () => {
     await this.isUserLogged();
+  };
+
+  componentDidUpdate = () => {
+    client
+      .subscribe({
+        query: SUBSCRIPTION_NOTIFICATION_ADDED_BY_ID,
+        variables: {
+          _id: this.state.user._id,
+        },
+      })
+      .subscribe({
+        next: (data) => {
+          this.updateStatusList(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  };
+
+  updateStatusList = ({ data }) => {
+    this.setState((prevState) => ({
+      statusList: _.uniqBy(
+        [...prevState.statusList, data.notificationAddedById],
+        '_id',
+      ),
+    }));
   };
 
   isUserLogged = async () => {

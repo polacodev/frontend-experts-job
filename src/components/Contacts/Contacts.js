@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Alert } from 'react-native';
+import _ from 'lodash';
 
 import { getPersonalInformation } from '../../graphql/user/user.api';
 import {
   getAllContacts,
   deleteContactById,
 } from '../../graphql/contact/contact.api';
+import { SUBSCRIPTION_CONTACT_ADDED } from '../../graphql/contact/contact.graphql';
 
 import ActivityIndicatorEJ from '../../core-components/ActivityIndicatorEJ/ActivityIndicatorEJ';
 import EmptyDataEJ from '../../core-components/EmptyData/EmptyDataEJ';
@@ -15,6 +17,7 @@ import HeaderEJ from '../../core-components/HeaderEJ/HeaderEJ';
 import * as localStorage from '../../config/local-storage/localStorage';
 import localization from '../../localization/localization';
 import * as utils from '../../utils/utils';
+import client from '../../service/setup';
 
 export default class Contacts extends React.Component {
   constructor(props) {
@@ -39,6 +42,21 @@ export default class Contacts extends React.Component {
 
   componentDidMount = async () => {
     await this.isUserLogged();
+  };
+
+  componentDidUpdate = () => {
+    client
+      .subscribe({
+        query: SUBSCRIPTION_CONTACT_ADDED,
+      })
+      .subscribe({
+        next: (data) => {
+          this.updateContactList(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   };
 
   isUserLogged = async () => {
@@ -86,6 +104,12 @@ export default class Contacts extends React.Component {
     } catch (e) {
       console.log(e.message);
     }
+  };
+
+  updateContactList = ({ data }) => {
+    this.setState((prevState) => ({
+      contacts: _.uniqBy([...prevState.contacts, data.contactAdded], '_id'),
+    }));
   };
 
   onPressItem = (value) => {
