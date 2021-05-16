@@ -39,7 +39,7 @@ export default class Search extends React.Component {
       users: [],
       contacts: [],
       currentUser: {},
-      isLoading: false,
+      isLoading: true,
       search: undefined,
       searchText: '',
     };

@@ -23,7 +23,6 @@ let localization = new LocalizedStrings({
     KnowledgeContact: 'Knowledge',
     ContactsTabTop: 'Contacts',
     ContactsTabFoot: 'Contacts',
-    noData: 'No Data',
 
     removeStatus: 'OK',
     cellphone: 'Cellphone',
@@ -82,6 +81,10 @@ let localization = new LocalizedStrings({
     statusRequestError: 'ERROR: Was not able to get Status',
     statusDeleteError: 'ERROR: Status has not been deleted',
     statusDeleteSuccess: 'Status has been deleted',
+
+    //Activity Indicator
+    loading: 'Loading...',
+    noData: 'No Data',
   },
   es: {
     //SignIn View
@@ -107,7 +110,6 @@ let localization = new LocalizedStrings({
     KnowledgeContact: 'Conocimiento',
     ContactsTabTop: 'Contactos',
     ContactsTabFoot: 'Contactos',
-    noData: 'No hay Datos',
 
     //Status View
     removeStatus: 'Borrar',
@@ -170,6 +172,10 @@ let localization = new LocalizedStrings({
     statusRequestError: 'ERROR: No se pudo recuperar lista Estados',
     statusDeleteError: 'ERROR: No se pudo eliminar el estado',
     statusDeleteSuccess: 'Estado ha sido eliminado',
+
+    //Activity Indicator
+    loading: 'Cargando...',
+    noData: 'No Hay Datos',
   },
 });
 

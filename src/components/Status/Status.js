@@ -36,7 +36,7 @@ export default class Status extends React.Component {
       statusList: [],
       originalData: [],
       searchText: '',
-      isLoading: false,
+      isLoading: true,
     };
   }
 
