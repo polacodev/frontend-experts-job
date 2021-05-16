@@ -48,6 +48,9 @@ export default class Contacts extends React.Component {
     client
       .subscribe({
         query: SUBSCRIPTION_CONTACT_ADDED,
+        variables: {
+          _id: this.state.user._id,
+        },
       })
       .subscribe({
         next: (data) => {
@@ -108,7 +111,7 @@ export default class Contacts extends React.Component {
 
   updateContactList = ({ data }) => {
     this.setState((prevState) => ({
-      contacts: _.uniqBy([...prevState.contacts, data.contactAdded], '_id'),
+      contacts: _.uniqBy([...prevState.contacts, data.contactAddedById], '_id'),
     }));
   };
 

@@ -41,8 +41,8 @@ export const DELETE_CONTACT_BY_CONTACT_ID = gql`
 `;
 
 export const SUBSCRIPTION_CONTACT_ADDED = gql`
-  subscription contactAdded {
-    contactAdded {
+  subscription contactAddedById($_id: ID!) {
+    contactAddedById(_id: $_id) {
       _id
       user_id
       createdBy
@@ -50,8 +50,6 @@ export const SUBSCRIPTION_CONTACT_ADDED = gql`
       email
       cellphone
       workarea
-      status
-      description
       knowledge
     }
   }
