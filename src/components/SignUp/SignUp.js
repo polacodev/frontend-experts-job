@@ -162,13 +162,13 @@ const SignUp = ({ navigation }) => {
       case 'email':
         if (validateEmail(text)) {
           setEmail({
-            email: text,
+            email: text.toLowerCase(),
             isValidEmail: true,
             stateEmail: 'valid',
           });
         } else {
           setEmail({
-            email: text,
+            email: text.toLowerCase(),
             isValidEmail: false,
             stateEmail: 'invalid',
           });
