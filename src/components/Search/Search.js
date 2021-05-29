@@ -51,7 +51,7 @@ export default class Search extends React.Component {
   };
 
   componentDidUpdate = () => {
-    client
+    this.querySubscription = client
       .subscribe({
         query: SUBSCRIPTION_USER_ADDED,
       })
@@ -63,6 +63,10 @@ export default class Search extends React.Component {
           console.log(err);
         },
       });
+  };
+
+  componentWillUnmount = () => {
+    this.querySubscription.unsubscribe();
   };
 
   isUserLogged = async () => {

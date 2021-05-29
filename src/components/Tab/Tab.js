@@ -74,20 +74,21 @@ const TabCustomBar = ({ state, descriptors, navigation }) => {
 };
 
 const TabScreen = () => {
-  const [isFooterHidden, setIsFooterHidden] = useState(false);
+  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', () => setIsFooterHidden(true));
-    Keyboard.addListener('keyboardDidHide', () => setIsFooterHidden(false));
+    Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
+    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
 
     // cleanup function
     return () => {
-      Keyboard.removeListener('keyboardDidShow', () => setIsFooterHidden(true));
-      Keyboard.removeListener('keyboardDidHide', () =>
-        setIsFooterHidden(false),
-      );
+      Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
+      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
     };
-  });
+  }, []);
+
+  const _keyboardDidShow = () => setKeyboardStatus('Keyboard Shown');
+  const _keyboardDidHide = () => setKeyboardStatus('Keyboard Hidden');
 
   return (
     <Tab.Navigator tabBar={(props) => <TabCustomBar {...props} />}>
@@ -95,27 +96,27 @@ const TabScreen = () => {
         name="Contacts"
         component={Contacts}
         options={() => ({
-          tabBarVisible: !isFooterHidden,
+          tabBarVisible: keyboardStatus !== 'Keyboard Shown' ? true : false,
         })}
       />
       <Tab.Screen
         name="Status"
         component={Status}
         options={() => ({
-          tabBarVisible: !isFooterHidden,
+          tabBarVisible: keyboardStatus !== 'Keyboard Shown' ? true : false,
         })}
       />
       <Tab.Screen
         name="Search"
         component={Search}
         options={() => ({
-          tabBarVisible: !isFooterHidden,
+          tabBarVisible: keyboardStatus !== 'Keyboard Shown' ? true : false,
         })}
       />
       <Tab.Screen
         name="User"
         options={() => ({
-          tabBarVisible: !isFooterHidden,
+          tabBarVisible: keyboardStatus !== 'Keyboard Shown' ? true : false,
         })}
         component={UserInformation}
       />

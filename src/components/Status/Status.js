@@ -45,7 +45,7 @@ export default class Status extends React.Component {
   };
 
   componentDidUpdate = () => {
-    client
+    this.querySubscription = client
       .subscribe({
         query: SUBSCRIPTION_NOTIFICATION_ADDED_BY_ID,
         variables: {
@@ -60,6 +60,10 @@ export default class Status extends React.Component {
           console.log(err);
         },
       });
+  };
+
+  componentWillUnmount = () => {
+    this.querySubscription.unsubscribe();
   };
 
   updateStatusList = ({ data }) => {

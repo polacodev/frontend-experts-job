@@ -47,7 +47,7 @@ export default class Contacts extends React.Component {
   };
 
   componentDidUpdate = () => {
-    client
+    this.querySubscription = client
       .subscribe({
         query: SUBSCRIPTION_CONTACT_ADDED,
         variables: {
@@ -62,6 +62,10 @@ export default class Contacts extends React.Component {
           console.log(err);
         },
       });
+  };
+
+  componentWillUnmount = () => {
+    this.querySubscription.unsubscribe();
   };
 
   isUserLogged = async () => {
