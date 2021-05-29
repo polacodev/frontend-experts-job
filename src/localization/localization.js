@@ -20,6 +20,7 @@ let localization = new LocalizedStrings({
     userAlreadyExistMessage: 'Email already exist',
 
     dismiss: 'Dismiss',
+    delete: 'Delete',
     KnowledgeContact: 'Knowledge',
     ContactsTabTop: 'Contacts',
     ContactsTabFoot: 'Contacts',
@@ -110,6 +111,7 @@ let localization = new LocalizedStrings({
 
     //Contacts View
     dismiss: 'Cerrar',
+    delete: 'Eliminar',
     KnowledgeContact: 'Conocimiento',
     ContactsTabTop: 'Contactos',
     ContactsTabFoot: 'Contactos',

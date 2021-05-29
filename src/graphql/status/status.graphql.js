@@ -43,6 +43,19 @@ export const DELETE_STATUS_BY_CONTACT_ID = gql`
   }
 `;
 
+export const DELETE_STATUS_BY_ID = gql`
+  mutation deleteNotification($_id: ID!) {
+    deleteNotification(_id: $_id) {
+      _id
+      user_id
+      createdBy
+      message
+      name
+      email
+    }
+  }
+`;
+
 // export const SUBSCRIPTION_NOTIFICATION_ADDED = gql`
 //   subscription notificationAdded {
 //     notificationAdded {

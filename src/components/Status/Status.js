@@ -3,7 +3,10 @@ import { Alert } from 'react-native';
 import _ from 'lodash';
 
 import { getPersonalInformation } from '../../graphql/user/user.api';
-import { getAllStatus } from '../../graphql/status/status.api';
+import {
+  getAllStatus,
+  deleteStatusById,
+} from '../../graphql/status/status.api';
 import {
   // SUBSCRIPTION_NOTIFICATION_ADDED,
   SUBSCRIPTION_NOTIFICATION_ADDED_BY_ID,
@@ -141,9 +144,27 @@ export default class Status extends React.Component {
         {
           text: localization.dismiss,
         },
+        {
+          text: localization.delete,
+          onPress: () => this.deleteStatus(value._id),
+        },
       ],
       { cancelable: false },
     );
+  };
+
+  deleteStatus = async (id) => {
+    const newStatusList = this.state.statusList.filter(
+      (item) => item._id !== id,
+    );
+    try {
+      await deleteStatusById(id);
+      this.setState({
+        statusList: newStatusList,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   handlerSearch = async (text) => {
