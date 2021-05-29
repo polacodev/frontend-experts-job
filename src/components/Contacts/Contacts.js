@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
 import _ from 'lodash';
+import OneSignal from 'react-native-onesignal';
 
 import { getPersonalInformation } from '../../graphql/user/user.api';
 import {
@@ -36,6 +37,7 @@ export default class Contacts extends React.Component {
       contacts: [],
       originalData: [],
       searchText: '',
+      isExternalUserIdPushed: false,
       isLoading: true,
     };
   }
@@ -90,10 +92,30 @@ export default class Contacts extends React.Component {
           knowledge: getUserByString.knowledge,
         },
       });
+      this.setExternalUserId(getUserByString._id);
       await this.getContacts(getUserByString._id);
     } catch (e) {
       console.log(e.message);
     }
+  };
+
+  setExternalUserId = (userId) => {
+    OneSignal.setExternalUserId(userId, (results) => {
+      // console.log('Results of setting external user id');
+      // console.log(results);
+      // Push can be expected in almost every situation with a success status, but
+      // as a pre-caution its good to verify it exists
+      if (results.push && results.push.success) {
+        // console.log('Results of setting external user id push status:');
+        // console.log(results.push.success);
+        this.setState({ isExternalUserIdPushed: results.push.success });
+      }
+      // Verify the email is set or check that the results have an email success status
+      // if (results.email && results.email.success) {
+      //   console.log('Results of setting external user id email status:');
+      //   console.log(results.email.success);
+      // }
+    });
   };
 
   getContacts = async (id) => {

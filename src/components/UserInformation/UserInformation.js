@@ -254,7 +254,7 @@ export default class UserInformation extends React.Component {
         _id: item.user_id,
         name: user.name,
         email: user.email,
-        message: 'lol',
+        message: localization.message,
         createdBy: user._id,
         cellphone: user.cellphone,
         workarea: user.workarea,

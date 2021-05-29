@@ -63,12 +63,26 @@ export default class Status extends React.Component {
   };
 
   updateStatusList = ({ data }) => {
-    this.setState((prevState) => ({
-      statusList: _.uniqBy(
-        [...prevState.statusList, data.notificationAddedById],
-        '_id',
-      ),
-    }));
+    const { statusList } = this.state;
+    if (
+      _.findIndex(statusList, { _id: data.notificationAddedById._id }) === -1
+    ) {
+      //New Status inserted
+      this.setState((prevState) => ({
+        statusList: _.uniqBy(
+          [...prevState.statusList, data.notificationAddedById],
+          '_id',
+        ),
+      }));
+    } else {
+      //Status updated
+      const newStatusList = statusList.map((status) => {
+        return status._id === data.notificationAddedById._id
+          ? data.notificationAddedById
+          : status;
+      });
+      this.setState({ statusList: newStatusList });
+    }
   };
 
   isUserLogged = async () => {

@@ -85,6 +85,9 @@ let localization = new LocalizedStrings({
     //Activity Indicator
     loading: 'Loading...',
     noData: 'No Data',
+
+    //Push Notification Message
+    message: 'Touch to see this profile',
   },
   es: {
     //SignIn View
@@ -176,6 +179,9 @@ let localization = new LocalizedStrings({
     //Activity Indicator
     loading: 'Cargando...',
     noData: 'No Hay Datos',
+
+    //Push Notification Message
+    message: 'Toca para ver este perfil',
   },
 });
 
