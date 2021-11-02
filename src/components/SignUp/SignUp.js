@@ -136,7 +136,7 @@ const SignUp = ({ navigation }) => {
   };
 
   const validateName = (value) => {
-    const match = /^[a-zA-Z0-9]+$/;
+    const match = /^[a-zA-Z0-9\s]+$/;
     return (
       match.test(value) && value.trim().length >= 5 && value.trim().length <= 20
     );
