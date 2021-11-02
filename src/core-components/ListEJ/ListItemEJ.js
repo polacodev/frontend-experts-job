@@ -20,7 +20,9 @@ const ListItemEJ = ({
     <ListItem avatar>
       <IconEJ iconName={leftIcon} size={20} color={color.icon} />
       <Body>
-        <TouchableOpacity onPress={() => onPressItem(user)}>
+        <TouchableOpacity
+          testID="button-body"
+          onPress={() => onPressItem(user)}>
           <TextEJ type="normal">{userName}</TextEJ>
           <TextEJ type="note">{user.email}</TextEJ>
         </TouchableOpacity>

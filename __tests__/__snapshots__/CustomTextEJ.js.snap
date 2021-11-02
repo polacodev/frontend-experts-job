@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomTextEJ /> renders <CustomTextEJ /> correctly 1`] = `
+<Text
+  numberOfLines={1}
+  style={
+    Array [
+      Object {
+        "color": "#000",
+        "fontFamily": "System",
+        "fontSize": 16,
+      },
+      Object {
+        "color": "#ffffff",
+        "fontSize": 20,
+        "paddingTop": 2,
+      },
+    ]
+  }
+  uppercase={false}
+>
+  test label normal
+</Text>
+`;

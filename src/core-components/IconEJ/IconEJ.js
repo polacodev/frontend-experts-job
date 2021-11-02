@@ -11,7 +11,7 @@ const IconEJ = ({
   onPressIcon = () => ({}),
 }) => {
   return onPressIcon.name ? (
-    <TouchableOpacity onPress={onPressIcon}>
+    <TouchableOpacity testID="button-icon" onPress={onPressIcon}>
       <Icon
         type="FontAwesome"
         name={iconName}
