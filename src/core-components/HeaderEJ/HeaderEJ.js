@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, Item, Input } from 'native-base';
 
 import IconEJ from '../IconEJ/IconEJ';
+import localization from '../../localization/localization';
 
 import color from '../../config/color/color';
 
@@ -11,7 +12,7 @@ const HeaderEJ = ({ searchText, handlerSearch = () => ({}) }) => {
       <Item>
         <IconEJ iconName="search" color={color.dark_gray} />
         <Input
-          placeholder="Search"
+          placeholder={localization.SearchTabTop}
           value={searchText}
           onChangeText={(text) => handlerSearch(text)}
         />

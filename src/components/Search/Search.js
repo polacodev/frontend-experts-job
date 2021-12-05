@@ -162,7 +162,7 @@ export default class Search extends React.Component {
   };
 
   onPressItem = (value) => {
-    const knowledge = value.email || '';
+    const knowledge = value.knowledge || '';
     Alert.alert(
       value.name,
       `${localization.KnowledgeContact}: ${knowledge}`,
