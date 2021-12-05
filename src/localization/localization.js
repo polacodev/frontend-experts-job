@@ -89,6 +89,10 @@ let localization = new LocalizedStrings({
 
     //Push Notification Message
     message: 'Touch to see this profile',
+
+    //Social Networks authentication
+    facebookSignin: 'Sign in with Facebook',
+    googleSignin: 'Sign in with Google',
   },
   es: {
     //SignIn View
@@ -184,6 +188,10 @@ let localization = new LocalizedStrings({
 
     //Push Notification Message
     message: 'Toca para ver este perfil',
+
+    //Social Networks authentication
+    facebookSignin: 'Ingresar con Facebook',
+    googleSignin: 'Ingresar con Google',
   },
 });
 

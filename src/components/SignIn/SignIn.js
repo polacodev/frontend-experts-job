@@ -24,6 +24,7 @@ import ButtonEJ from '../../core-components/ButtonEJ/ButtonEJ';
 import IconEJ from '../../core-components/IconEJ/IconEJ';
 import * as localStorage from '../../config/local-storage/localStorage';
 import authentication from '../../graphql/authentication/authentication.api';
+import SocialNetworkLogin from '../SocialNetworkLogin/SocialNetworkLogin';
 
 import styles from './SignIn.style';
 
@@ -191,6 +192,14 @@ const SignIn = ({ navigation }) => {
     }
   };
 
+  const onFacebookLogin = () => {
+    console.log('yes********onFacebookLogin');
+  };
+
+  const onGoogleLogin = () => {
+    console.log('yes********onGoogleLogin');
+  };
+
   const signInTopContent = () => (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
@@ -205,9 +214,21 @@ const SignIn = ({ navigation }) => {
           style={styles.imageIconTitle}
         />
       </View>
-      <View style={styles.headerContent}>
-        <Text style={styles.errorText}>
-          {isSignInErrorDisplayed ? localization.loginError : null}
+    </View>
+  );
+
+  const socialNetLogin = () => (
+    <View style={styles.socialNetworkContainer}>
+      <View style={styles.socialLogin}>
+        <Text style={styles.googleLogin}>
+          <IconEJ color="white" size={30} iconName="google" />
+          <Text style={styles.socialNetworkText}> Sign in with Google</Text>
+        </Text>
+      </View>
+      <View style={styles.socialLogin}>
+        <Text style={styles.facebookLogin}>
+          <IconEJ color="white" size={30} iconName="facebook" />
+          <Text style={styles.socialNetworkText}> Sign in with Facebook</Text>
         </Text>
       </View>
     </View>
@@ -276,10 +297,25 @@ const SignIn = ({ navigation }) => {
     </View>
   );
 
+  const loginError = () => (
+    <View style={styles.headerContent}>
+      <Text style={styles.errorText}>
+        {isSignInErrorDisplayed ? localization.loginError : null}
+      </Text>
+    </View>
+  );
+
   return (
     <Container style={styles.container}>
       <Content scrollEnabled={false}>
         {signInTopContent()}
+        {/* {socialNetLogin()} */}
+        {/* <SocialNetworkLogin
+          onFacebookLogin={onFacebookLogin}
+          onGoogleLogin={onGoogleLogin}
+        />
+      */}
+        {loginError()}
         {signInForm()}
       </Content>
       {!isFooterHidden && <Footer>{signInFooterContent()}</Footer>}
