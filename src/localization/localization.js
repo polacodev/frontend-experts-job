@@ -89,6 +89,7 @@ let localization = new LocalizedStrings({
 
     //Push Notification Message
     message: 'Touch to see this profile',
+    description: `'s profile has been updated`,
 
     //Social Networks authentication
     facebookSignin: 'Sign in with Facebook',
@@ -188,6 +189,7 @@ let localization = new LocalizedStrings({
 
     //Push Notification Message
     message: 'Toca para ver este perfil',
+    description: 'actualizo su perfil',
 
     //Social Networks authentication
     facebookSignin: 'Ingresar con Facebook',

@@ -136,10 +136,12 @@ export default class Status extends React.Component {
   };
 
   onPressItem = (value) => {
+    const email = value.email || '';
+    const workarea = value.workarea || '';
     const knowledge = value.knowledge || '';
     Alert.alert(
       value.name,
-      `${localization.KnowledgeContact}: ${knowledge}`,
+      `${localization.email}: ${email}\n${localization.workarea}: ${workarea}\n${localization.KnowledgeContact}: ${knowledge}`,
       [
         {
           text: localization.dismiss,
