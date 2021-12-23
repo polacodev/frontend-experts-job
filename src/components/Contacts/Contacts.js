@@ -39,6 +39,7 @@ export default class Contacts extends React.Component {
       searchText: '',
       isExternalUserIdPushed: false,
       isLoading: true,
+      refreshing: false,
     };
   }
 
@@ -180,8 +181,18 @@ export default class Contacts extends React.Component {
     this.setState({ searchText: text });
   };
 
+  onRefresh = () => {
+    const wait = (timeout) => {
+      return new Promise((resolve) => setTimeout(resolve, timeout));
+    };
+    this.setState({ refreshing: true });
+    this.getContacts(this.state.user._id);
+
+    wait(2000).then(() => this.setState({ refreshing: false }));
+  };
+
   render() {
-    const { contacts, searchText, isLoading } = this.state;
+    const { contacts, searchText, isLoading, refreshing } = this.state;
     if (isLoading) {
       return <ActivityIndicatorEJ />;
     }
@@ -207,6 +218,8 @@ export default class Contacts extends React.Component {
           rightIcon="trash"
           onPressItem={this.onPressItem}
           onPressRightIcon={this.onPressDeleteIcon}
+          onRefresh={this.onRefresh}
+          refreshing={refreshing}
         />
       </>
     );

@@ -6,10 +6,7 @@ import {
   getAllUsers,
   getPersonalInformation,
 } from '../../graphql/user/user.api';
-import {
-  getAllContacts,
-  createNewContact,
-} from '../../graphql/contact/contact.api';
+import { createNewContact } from '../../graphql/contact/contact.api';
 import { SUBSCRIPTION_USER_ADDED } from '../../graphql/user/user.graphql';
 
 import ActivityIndicatorEJ from '../../core-components/ActivityIndicatorEJ/ActivityIndicatorEJ';
@@ -37,11 +34,11 @@ export default class Search extends React.Component {
         knowledge: '',
       },
       users: [],
-      contacts: [],
       currentUser: {},
       isLoading: true,
       search: undefined,
       searchText: '',
+      refreshing: false,
     };
   }
 
@@ -98,17 +95,6 @@ export default class Search extends React.Component {
           knowledge: getUserByString.knowledge,
         },
       });
-      await this.getContacts(getUserByString._id);
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  getContacts = async (_id) => {
-    try {
-      const { data, loading } = await getAllContacts(_id);
-      this.setState({ contacts: data.getContactsByUserId });
-      this.setState({ isLoading: loading });
     } catch (e) {
       console.log(e.message);
     }
@@ -121,16 +107,11 @@ export default class Search extends React.Component {
   };
 
   getUsers = async () => {
-    const { search, currentUser, contacts } = this.state;
+    const { search, currentUser } = this.state;
     try {
       const { data, loading } = await getAllUsers(search, currentUser);
-      const usersFiltered = _.differenceBy(
-        utils.buildArray(data.getUsers),
-        utils.buildArray(contacts),
-        'email',
-      );
       this.setState({
-        users: usersFiltered,
+        users: data.getUsers,
         isLoading: loading,
         searchText: '',
       });
@@ -188,8 +169,18 @@ export default class Search extends React.Component {
     }
   };
 
+  onRefresh = () => {
+    const wait = (timeout) => {
+      return new Promise((resolve) => setTimeout(resolve, timeout));
+    };
+    this.setState({ refreshing: true });
+    this.getUsers();
+
+    wait(2000).then(() => this.setState({ refreshing: false }));
+  };
+
   render() {
-    const { isLoading, users, searchText } = this.state;
+    const { isLoading, users, searchText, refreshing } = this.state;
     if (isLoading) {
       return <ActivityIndicatorEJ />;
     }
@@ -205,6 +196,9 @@ export default class Search extends React.Component {
           rightIcon="user-plus"
           onPressItem={this.onPressItem}
           onPressRightIcon={this.onPressAddNewUserIcon}
+          onRefresh={this.onRefresh}
+          refreshing={refreshing}
+          onRatingValues={true}
         />
       </>
     );
