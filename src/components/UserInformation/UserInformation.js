@@ -1,7 +1,13 @@
 import React from 'react';
 import NetInfo from '@react-native-community/netinfo';
 import RadioButton from 'react-native-radio-button';
-import { View, Alert, BackHandler, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Alert,
+  BackHandler,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import {
   Container,
   Content,
@@ -17,6 +23,7 @@ import localization from '../../localization/localization';
 import * as localStorage from '../../config/local-storage/localStorage';
 
 import CustomTextEJ from '../../core-components/CustomTextEJ/CustomTextEJ';
+import StarEJ from '../../core-components/StarEJ/StarEJ';
 import {
   getPersonalInformation,
   updateUser,
@@ -24,6 +31,7 @@ import {
 import { getAllContacts } from '../../graphql/contact/contact.api';
 import { createNewStatus } from '../../graphql/status/status.api';
 
+import { stars } from '../../utils/utils';
 import color from '../../config/color/color';
 import styles from './UserInformation.style';
 
@@ -40,10 +48,9 @@ export default class UserInformation extends React.Component {
         status: undefined,
         description: '',
         knowledge: '',
+        rate: {},
       },
       contacts: [],
-      // originalData: [],
-      // searchText: '',
       isLoading: true,
       isDisabledButton: true,
       token: undefined,
@@ -51,6 +58,7 @@ export default class UserInformation extends React.Component {
         available: undefined,
         unavailable: undefined,
       },
+      refreshing: false,
     };
   }
 
@@ -113,6 +121,7 @@ export default class UserInformation extends React.Component {
           status: getUserByString.status,
           description: getUserByString.description,
           knowledge: getUserByString.knowledge,
+          rate: getUserByString?.rate,
         },
         radio: {
           available: getUserByString.status ? true : false,
@@ -270,14 +279,35 @@ export default class UserInformation extends React.Component {
     });
   };
 
+  onRefresh = () => {
+    const wait = (timeout) => {
+      return new Promise((resolve) => setTimeout(resolve, timeout));
+    };
+    this.setState({ refreshing: true });
+    this.isUserLogged();
+
+    wait(2000).then(() => this.setState({ refreshing: false }));
+  };
+
   render() {
-    const { user, radio, isDisabledButton } = this.state;
+    const { user, radio, isDisabledButton, refreshing } = this.state;
     const userTopInformation = () => (
       <View>
         <View style={styles.userTopInformationTitle}>
           <CustomTextEJ size={17} color={color.text}>
             {user.name.toLocaleUpperCase()}
           </CustomTextEJ>
+        </View>
+        <View style={styles.starContainer}>
+          {stars.map((star, index) => (
+            <View key={star.id} style={styles.starItems}>
+              <StarEJ
+                filled={index < user?.rate?.averageRate ? true : false}
+                size={20}
+                color={color.star}
+              />
+            </View>
+          ))}
         </View>
         <View style={styles.userTopInfoTextStatus}>
           <RadioButton
@@ -382,8 +412,13 @@ export default class UserInformation extends React.Component {
 
     return (
       <Container>
-        {/* {console.log('status=>', this.state.user.status)} */}
-        <Content>
+        <Content
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }>
           {userTopInformation()}
           {userInformationForm()}
         </Content>

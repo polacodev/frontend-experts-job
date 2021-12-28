@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
     color: color.text,
     fontSize: 15,
   },
+  starContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  starItems: {
+    marginRight: 5,
+  },
 });
 
 export default styles;

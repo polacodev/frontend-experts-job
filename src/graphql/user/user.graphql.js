@@ -68,6 +68,10 @@ export const GET_USER_BY_STRING = gql`
       status
       description
       knowledge
+      rate {
+        user_id
+        averageRate
+      }
     }
   }
 `;
