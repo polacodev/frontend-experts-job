@@ -40,6 +40,10 @@ export const GET_ALL_USERS = gql`
       status
       description
       knowledge
+      rate {
+        user_id
+        averageRate
+      }
     }
   }
 `;

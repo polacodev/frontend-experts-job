@@ -33,3 +33,11 @@ export const fuse = (text, list) => {
   const pattern = text;
   return response.search(pattern);
 };
+
+export const stars = [
+  { id: 'lvl-1' },
+  { id: 'lvl-2' },
+  { id: 'lvl-3' },
+  { id: 'lvl-4' },
+  { id: 'lvl-5' },
+];
