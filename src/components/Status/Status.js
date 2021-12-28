@@ -45,6 +45,7 @@ export default class Status extends React.Component {
       searchText: '',
       isLoading: true,
       rating: 0,
+      refreshing: false,
     };
   }
 
@@ -220,6 +221,16 @@ export default class Status extends React.Component {
     this.setState({ isModalVisible: true, userOnModal: value });
   };
 
+  onRefresh = () => {
+    const wait = (timeout) => {
+      return new Promise((resolve) => setTimeout(resolve, timeout));
+    };
+    this.setState({ refreshing: true });
+    this.isUserLogged();
+
+    wait(2000).then(() => this.setState({ refreshing: false }));
+  };
+
   render() {
     const {
       statusList,
@@ -228,6 +239,7 @@ export default class Status extends React.Component {
       isModalVisible,
       userOnModal,
       rating,
+      refreshing,
     } = this.state;
     if (isLoading) {
       return <ActivityIndicatorEJ />;
@@ -254,6 +266,8 @@ export default class Status extends React.Component {
           rightIcon="star"
           onPressItem={this.onPressItem}
           onPressRightIcon={this.onPressStarIcon}
+          onRefresh={this.onRefresh}
+          refreshing={refreshing}
         />
         {isModalVisible && (
           <CustomDialogEJ
