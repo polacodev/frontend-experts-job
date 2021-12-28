@@ -78,6 +78,8 @@ let localization = new LocalizedStrings({
 
     authError: 'ERROR: Authentication error!',
 
+    rateAddError: 'ERROR: Rate has not been added',
+
     statusAddError: 'ERROR: Status has not been added',
     statusRequestError: 'ERROR: Was not able to get Status',
     statusDeleteError: 'ERROR: Status has not been deleted',
@@ -94,6 +96,10 @@ let localization = new LocalizedStrings({
     //Social Networks authentication
     facebookSignin: 'Sign in with Facebook',
     googleSignin: 'Sign in with Google',
+
+    // User rating
+    rate: 'Rate to',
+    rateLabel: 'Rate',
   },
   es: {
     //SignIn View
@@ -178,6 +184,8 @@ let localization = new LocalizedStrings({
 
     authError: 'ERROR: Error de Authenticacion!',
 
+    rateAddError: 'ERROR: No se pudo crear la calificacion',
+
     statusAddError: 'ERROR: No se pudo crear el nuevo estado',
     statusRequestError: 'ERROR: No se pudo recuperar lista Estados',
     statusDeleteError: 'ERROR: No se pudo eliminar el estado',
@@ -194,6 +202,10 @@ let localization = new LocalizedStrings({
     //Social Networks authentication
     facebookSignin: 'Ingresar con Facebook',
     googleSignin: 'Ingresar con Google',
+
+    // User rating
+    rate: 'Califica a',
+    rateLabel: 'Calificar',
   },
 });
 

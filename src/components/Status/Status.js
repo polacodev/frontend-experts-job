@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import _ from 'lodash';
 
 import { getPersonalInformation } from '../../graphql/user/user.api';
+import { createNewRate } from '../../graphql/rate/rate.api';
 import {
   getAllStatus,
   deleteStatusById,
@@ -21,6 +22,7 @@ import * as localStorage from '../../config/local-storage/localStorage';
 import localization from '../../localization/localization';
 import * as utils from '../../utils/utils';
 import client from '../../service/setup';
+import CustomDialogEJ from '../../core-components/DialogEJ/CustomDialogEJ';
 
 export default class Status extends React.Component {
   constructor(props) {
@@ -37,9 +39,12 @@ export default class Status extends React.Component {
         knowledge: '',
       },
       statusList: [],
+      isModalVisible: false,
+      userOnModal: {},
       originalData: [],
       searchText: '',
       isLoading: true,
+      rating: 0,
     };
   }
 
@@ -155,6 +160,17 @@ export default class Status extends React.Component {
     );
   };
 
+  handlerSearch = async (text) => {
+    if (text.length === 0) {
+      this.setState({ statusList: this.state.originalData });
+    } else {
+      const response = utils.fuse(text, this.state.originalData);
+      const res = response.map((element) => element.item);
+      this.setState({ statusList: res });
+    }
+    this.setState({ searchText: text });
+  };
+
   deleteStatus = async (id) => {
     const newStatusList = this.state.statusList.filter(
       (item) => item._id !== id,
@@ -169,19 +185,50 @@ export default class Status extends React.Component {
     }
   };
 
-  handlerSearch = async (text) => {
-    if (text.length === 0) {
-      this.setState({ statusList: this.state.originalData });
-    } else {
-      const response = utils.fuse(text, this.state.originalData);
-      const res = response.map((element) => element.item);
-      this.setState({ statusList: res });
+  createRate = async (value) => {
+    const { rating } = this.state;
+    const newRate = {
+      _id: value.createdBy,
+      ratedBy: value.user_id,
+      name: value.name,
+      rate: rating,
+    };
+    try {
+      const res = await createNewRate(newRate);
+      this.setState({ rating: 0 });
+    } catch (error) {
+      console.log(error.message);
     }
-    this.setState({ searchText: text });
+  };
+
+  onCloseRateModal = (value) => {
+    this.setState({ isModalVisible: value, rating: 0 });
+  };
+
+  onChangeRatingStars = (value) => {
+    this.setState({ rating: value });
+  };
+
+  onRateUser = (value) => {
+    const { userOnModal } = this.state;
+    this.deleteStatus(userOnModal._id);
+    this.createRate(userOnModal);
+    this.setState({ isModalVisible: value });
+  };
+
+  onPressStarIcon = (value) => {
+    this.setState({ isModalVisible: true, userOnModal: value });
   };
 
   render() {
-    const { statusList, searchText, isLoading } = this.state;
+    const {
+      statusList,
+      searchText,
+      isLoading,
+      isModalVisible,
+      userOnModal,
+      rating,
+    } = this.state;
     if (isLoading) {
       return <ActivityIndicatorEJ />;
     }
@@ -204,10 +251,20 @@ export default class Status extends React.Component {
         <ListEJ
           data={statusList}
           leftIcon="user-o"
-          rightIcon="dot-circle-o"
+          rightIcon="star"
           onPressItem={this.onPressItem}
-          onPressRightIcon={this.onPressItem}
+          onPressRightIcon={this.onPressStarIcon}
         />
+        {isModalVisible && (
+          <CustomDialogEJ
+            isModalVisible={isModalVisible}
+            user={userOnModal}
+            onCloseRateModal={this.onCloseRateModal}
+            onChangeRatingStars={this.onChangeRatingStars}
+            onRateUser={this.onRateUser}
+            rating={rating}
+          />
+        )}
       </>
     );
   }
