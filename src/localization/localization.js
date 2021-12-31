@@ -91,7 +91,7 @@ let localization = new LocalizedStrings({
 
     //Push Notification Message
     message: 'Touch to see this profile',
-    description: `'s profile has been updated`,
+    description: "'s profile has been updated",
 
     //Social Networks authentication
     facebookSignin: 'Sign in with Facebook',
@@ -103,8 +103,8 @@ let localization = new LocalizedStrings({
   },
   es: {
     //SignIn View
-    signInButtonFooterLabel: 'Regístrate',
-    signInFooterLabel: '¿Aún no tienes una cuenta?',
+    signInButtonFooterLabel: 'Registrate',
+    signInFooterLabel: '¿Aun no tienes una cuenta?',
     signInButton: 'Ingresar',
     email: 'Correo',
     password: 'Contraseña',

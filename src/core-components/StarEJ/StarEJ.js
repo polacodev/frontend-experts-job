@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import IconEJ from '../IconEJ/IconEJ';
 
 const StarEJ = ({ filled, color, size, onChangeRatingStars = () => ({}) }) => {
-  return (
+  return onChangeRatingStars.name ? (
     <View>
       <IconEJ
         onPressIcon={() => onChangeRatingStars()}
@@ -12,6 +12,10 @@ const StarEJ = ({ filled, color, size, onChangeRatingStars = () => ({}) }) => {
         size={size}
         color={color}
       />
+    </View>
+  ) : (
+    <View>
+      <IconEJ iconName={filled ? 'star' : 'star-o'} size={size} color={color} />
     </View>
   );
 };

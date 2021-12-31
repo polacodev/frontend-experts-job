@@ -161,6 +161,7 @@ export default class UserInformation extends React.Component {
             status: user.status,
             description: user.description,
             knowledge: user.knowledge,
+            rate: user.rate,
           },
         });
         break;
@@ -175,6 +176,7 @@ export default class UserInformation extends React.Component {
             status: user.status,
             description: user.description,
             knowledge: user.knowledge,
+            rate: user.rate,
           },
         });
         break;
@@ -189,6 +191,7 @@ export default class UserInformation extends React.Component {
             status: user.status,
             description: user.description,
             knowledge: user.knowledge,
+            rate: user.rate,
           },
         });
         break;
@@ -203,6 +206,7 @@ export default class UserInformation extends React.Component {
             status: user.status,
             description: text,
             knowledge: user.knowledge,
+            rate: user.rate,
           },
         });
         break;
@@ -217,6 +221,7 @@ export default class UserInformation extends React.Component {
             status: user.status,
             description: user.description,
             knowledge: text,
+            rate: user.rate,
           },
         });
         break;
