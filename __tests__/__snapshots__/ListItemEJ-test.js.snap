@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListItemEJ /> renders <ListItemEJ /> correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>
+  <View
+    avatar={true}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "borderBottomWidth": null,
+        "borderColor": "#c9c9c9",
+        "flexDirection": "row",
+        "marginLeft": 16,
+        "paddingBottom": null,
+        "paddingRight": null,
+        "paddingTop": null,
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 12,
+          },
+          Array [
+            Object {
+              "color": "#000",
+              "fontSize": 30,
+            },
+            Object {
+              "color": "#000",
+              "fontSize": 30,
+            },
+            Object {
+              "color": "#00796b",
+              "fontSize": 20,
+            },
+          ],
+          Object {
+            "fontFamily": "FontAwesome",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+      type="FontAwesome"
+    >
+      
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": null,
+          "alignSelf": null,
+          "borderBottomWidth": 0.5,
+          "borderColor": "#c9c9c9",
+          "flex": 1,
+          "marginLeft": 15,
+          "paddingBottom": 10,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID="button-body"
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#000",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "marginLeft": null,
+              "marginRight": 10,
+            }
+          }
+          uppercase={false}
+        >
+          Mark Stobbe
+        </Text>
+        <Text
+          note={true}
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#808080",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "200",
+              "marginLeft": null,
+              "marginRight": 10,
+            }
+          }
+          uppercase={false}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "alignSelf": "stretch",
+          "borderBottomWidth": 0.5,
+          "borderColor": "#c9c9c9",
+          "flex": 0,
+          "paddingBottom": 10,
+          "paddingLeft": null,
+          "paddingRight": 15,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID="button-icon"
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 12,
+              },
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontSize": 30,
+                },
+                Object {
+                  "alignSelf": null,
+                  "color": "#c9c8cd",
+                  "fontSize": 22,
+                },
+                Object {
+                  "color": "#00796b",
+                  "fontSize": 20,
+                },
+              ],
+              Object {
+                "fontFamily": "FontAwesome",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+          type="FontAwesome"
+        >
+          
+        </Text>
+      </View>
+      <Text
+        note={true}
+        numberOfLines={1}
+        style={
+          Object {
+            "alignSelf": null,
+            "color": "#808080",
+            "fontFamily": "System",
+            "fontSize": 12,
+            "fontWeight": "200",
+          }
+        }
+        uppercase={false}
+      >
+        Developer | 75412587
+      </Text>
+    </View>
+  </View>
+</View>
+`;

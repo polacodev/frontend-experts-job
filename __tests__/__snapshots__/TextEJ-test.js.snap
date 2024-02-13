@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextEJ /> renders <TextEJ /> correctly 1`] = `
+<Text
+  numberOfLines={1}
+  style={
+    Object {
+      "color": "#000",
+      "fontFamily": "System",
+      "fontSize": 16,
+    }
+  }
+  uppercase={false}
+>
+  test label example
+</Text>
+`;
